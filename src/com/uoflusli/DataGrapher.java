@@ -23,9 +23,31 @@ public class DataGrapher {
         }
 
         Element root = dataFile.getRootElement();
-//
-//        System.out.println(root);
-//
+
+        int packetType = null;
+        int packetHour = null;
+        int packetMinute = null;
+        int packetSecond = null;
+        int packetPressure1 = null;
+        int packetTemperature1 = null;
+        int packetHumidity1 = null;
+        int packetIrradiance1 = null;
+        int packetRadiation1 = null;
+        int packetPressure2 = null;
+        int packetTemperature2 = null;
+        int packetHumidity2 = null;
+        int packetIrradiance2 = null;
+        int packetRadiation2 = null;
+        int packetLatitude = null;
+        int packetLongitude = null;
+        int packetAccelX = null;
+        int packetAccelY = null;
+        int packetAccelZ = null;
+        int packetGyroX = null;
+        int packetGyroY = null;
+        int packetGyroZ = null;
+        int packetBearing = null;
+
         // Iterate through all packets in the document.
         for (int packet = 0; packet <root.getChildElements().size(); packet++) {
             System.out.println(root.getChild(packet));
@@ -33,9 +55,12 @@ public class DataGrapher {
             // Iterate through all data readings in a packet.
             for (int dataReading = 1; dataReading < root.getChild(packet).getChildCount(); dataReading++) {
                 if (root.getChild(packet).getChild(dataReading) instanceof Element) {
+                    Node data = root.getChild(packet).getChild(dataReading);
 
+                    // TODO Make an enum or similar to clean up this code. Rather than a big switch
+                    // statement, store string representation in the enum.
                     switch (((Element) root.getChild(packet).getChild(dataReading)).getQualifiedName()) {
-                        case "Type": break;
+                        case "Type": packetType = Integer.parseInt(data.getValue()); break;
                         case "Hour": break;
                         case "Minute": break;
                         case "Second": break;

@@ -22,7 +22,7 @@ that, we'll have to work together to figure out extra features. -->
         <Second>1</Second>
 
         <Pressure1>1</Pressure1>
-        <temperature1>1</temperature1>
+        <Temperature1>1</Temperature1>
         <Humidity1>1</Humidity1>
         <Solar_Irradiance1>1</Solar_Irradiance1>
         <UV_Radiation1>1</UV_Radiation1>
@@ -44,7 +44,7 @@ that, we'll have to work together to figure out extra features. -->
         <Gyro_Y>1</Gyro_Y>
         <Gyro_Z>1</Gyro_Z>
 
-        <bearing>1</bearing>
+        <Bearing>1</Bearing>
     </packet>
     <packet>
         <Type>1</Type>
@@ -53,7 +53,38 @@ that, we'll have to work together to figure out extra features. -->
         <Second>1</Second>
 
         <Pressure1>1</Pressure1>
-        <temperature1>1</temperature1>
+        <Temperature1>1</Temperature1>
+        <Humidity1>1</Humidity1>
+        <Solar_Irradiance1>1</Solar_Irradiance1>
+        <UV_Radiotion1>1</UV_Radiotion1>
+
+        <Pressure2>1</Pressure2>
+        <Temperature2>1</Temperature2>
+        <Humidity2>1</Humidity2>
+        <Solar_Irradiance2>1</Solar_Irradiance2>
+        <UV_Radiotion2>1</UV_Radiotion2>
+
+        <GPS.Latitude>1</GPS.Latitude>>
+        <GPS.Longitude>1</GPS.Longitude>
+
+        <Accelerometer_X>1</Accelerometer_X>
+        <Accelerometer_Y>1</Accelerometer_Y>
+        <Accelerometer_Z>1</Accelerometer_Z>
+
+        <Gyro_X>1</Gyro_X>
+        <Gyro_Y>1</Gyro_Y>
+        <Gyro_Z>1</Gyro_Z>
+
+        <Bearing>1</Bearing>
+    </packet>
+    <packet>
+        <Type>1</Type>
+        <Hour>1</Hour>
+        <Minute>1</Minute>
+        <Second>1</Second>
+
+        <Pressure1>1</Pressure1>
+        <Temperature1>1</Temperature1>
         <Humidity1>1</Humidity1>
         <Solar_Irradiance1>1</Solar_Irradiance1>
         <UV_Radiotion1>1</UV_Radiotion1>
@@ -84,7 +115,7 @@ that, we'll have to work together to figure out extra features. -->
         <Second>1</Second>
 
         <Pressure1>1</Pressure1>
-        <temperature1>1</temperature1>
+        <Temperature1>1</Temperature1>
         <Humidity1>1</Humidity1>
         <Solar_Irradiance1>1</Solar_Irradiance1>
         <UV_Radiotion1>1</UV_Radiotion1>
@@ -106,7 +137,7 @@ that, we'll have to work together to figure out extra features. -->
         <Gyro_Y>1</Gyro_Y>
         <Gyro_Z>1</Gyro_Z>
 
-        <bearing>1</bearing>
+        <Bearing>1</Bearing>
     </packet>
     <packet>
         <Type>1</Type>
@@ -115,7 +146,7 @@ that, we'll have to work together to figure out extra features. -->
         <Second>1</Second>
 
         <Pressure1>1</Pressure1>
-        <temperature1>1</temperature1>
+        <Temperature1>1</Temperature1>
         <Humidity1>1</Humidity1>
         <Solar_Irradiance1>1</Solar_Irradiance1>
         <UV_Radiotion1>1</UV_Radiotion1>
@@ -137,37 +168,6 @@ that, we'll have to work together to figure out extra features. -->
         <Gyro_Y>1</Gyro_Y>
         <Gyro_Z>1</Gyro_Z>
 
-        <bearing>1</bearing>
-    </packet>
-    <packet>
-        <Type>1</Type>
-        <Hour>1</Hour>
-        <Minute>1</Minute>
-        <Second>1</Second>
-
-        <Pressure1>1</Pressure1>
-        <temperature1>1</temperature1>
-        <Humidity1>1</Humidity1>
-        <Solar_Irradiance1>1</Solar_Irradiance1>
-        <UV_Radiotion1>1</UV_Radiotion1>
-
-        <Pressure2>1</Pressure2>
-        <Temperature2>1</Temperature2>
-        <Humidity2>1</Humidity2>
-        <Solar_Irradiance2>1</Solar_Irradiance2>
-        <UV_Radiotion2>1</UV_Radiotion2>
-
-        <GPS.Latitude>1</GPS.Latitude>>
-        <GPS.Longitude>1</GPS.Longitude>
-
-        <Accelerometer_X>1</Accelerometer_X>
-        <Accelerometer_Y>1</Accelerometer_Y>
-        <Accelerometer_Z>1</Accelerometer_Z>
-
-        <Gyro_X>1</Gyro_X>
-        <Gyro_Y>1</Gyro_Y>
-        <Gyro_Z>1</Gyro_Z>
-
-        <bearing>1</bearing>
+        <Bearing>1</Bearing>
     </packet>
 </data>
