@@ -1,0 +1,176 @@
+<!--Our largest software need, outside of the previously explained software, is having the ability to analyze the
+        data we receive. After the competition in April, we have to submit one final report that explains
+        our findings. Naturally, graphs and pictures are great ways at illustrating how our systems performed.
+        Take the XML parser that you already made and modify it to work with the existing packet structure shown
+        in the attached picture. Assume the XML file is a bunch of these packets stored serially, one after another,-->
+<!--encapsulated by <packet>1</packet> tags and that the data fields will be in the same order. Your software should-->
+<!--be able to plot all atmospheric data, accelerometer data, and gyroscope data versus time AND latitude & longitude
+(two separate graphs). You may generate the graphs using Excel, however, I encourage you to try your hand at Matlab
+(free to Speed students, downloadable here after logging into the online store) or Octave (the open source alternative).
+(If you choose the Matlab/Octave route, then it opens up the door for us to 3D model the payload and move it in
+time according to the kinematic data, i.e. a simulated replay of the payload movement in time. The movie can then
+be used to visually relate the payload orientation to the values of the atmospheric data.) If you want to learn
+Matlab/Octave, I can teach you everything you'll need to know to accomplish graphing in an hour or two. Beyond
+that, we'll have to work together to figure out extra features. -->
+
+<data>
+    <packet>
+        <type>1</type>
+        <hour>1</hour>
+        <minute>1</minute>
+        <second>1</second>
+
+        <pressure1>1</pressure1>
+        <temperature1>1</temperature1>
+        <humidity1>1</humidity1>
+        <irradiance1>1</irradiance1>
+        <radiation1>1</radiation1>
+
+        <pressure2>1</pressure2>
+        <temperature2>1</temperature2>
+        <humidity2>1</humidity2>
+        <irradiance2>1</irradiance2>
+        <radiation2>1</radiation2>
+
+        <latitude>1</latitude>
+        <longitude>1</longitude>
+
+        <accelX>1</accelX>
+        <accelY>1</accelY>
+        <accelZ>1</accelZ>
+
+        <gyroX>1</gyroX>
+        <gyroY>1</gyroY>
+        <gyroZ>1</gyroZ>
+
+        <bearing>1</bearing>
+    </packet>
+
+    <packet>
+        <type>1</type>
+        <hour>1</hour>
+        <minute>1</minute>
+        <second>1</second>
+
+        <pressure1>1</pressure1>
+        <temperature1>1</temperature1>
+        <humidity1>1</humidity1>
+        <irradiance1>1</irradiance1>
+        <radiation1>1</radiation1>
+
+        <pressure2>1</pressure2>
+        <temperature2>1</temperature2>
+        <humidity2>1</humidity2>
+        <irradiance2>1</irradiance2>
+        <radiation2>1</radiation2>
+
+        <latitude>1</latitude>
+        <longitude>1</longitude>
+
+        <accelX>1</accelX>
+        <accelY>1</accelY>
+        <accelZ>1</accelZ>
+
+        <gyroX>1</gyroX>
+        <gyroY>1</gyroY>
+        <gyroZ>1</gyroZ>
+
+        <bearing>1</bearing>
+    </packet>
+
+    <packet>
+        <type>1</type>
+        <hour>1</hour>
+        <minute>1</minute>
+        <second>1</second>
+
+        <pressure1>1</pressure1>
+        <temperature1>1</temperature1>
+        <humidity1>1</humidity1>
+        <irradiance1>1</irradiance1>
+        <radiation1>1</radiation1>
+
+        <pressure2>1</pressure2>
+        <temperature2>1</temperature2>
+        <humidity2>1</humidity2>
+        <irradiance2>1</irradiance2>
+        <radiation2>1</radiation2>
+
+        <latitude>1</latitude>
+        <longitude>1</longitude>
+
+        <accelX>1</accelX>
+        <accelY>1</accelY>
+        <accelZ>1</accelZ>
+
+        <gyroX>1</gyroX>
+        <gyroY>1</gyroY>
+        <gyroZ>1</gyroZ>
+
+        <bearing>1</bearing>
+    </packet>
+
+    <packet>
+        <type>1</type>
+        <hour>1</hour>
+        <minute>1</minute>
+        <second>1</second>
+
+        <pressure1>1</pressure1>
+        <temperature1>1</temperature1>
+        <humidity1>1</humidity1>
+        <irradiance1>1</irradiance1>
+        <radiation1>1</radiation1>
+
+        <pressure2>1</pressure2>
+        <temperature2>1</temperature2>
+        <humidity2>1</humidity2>
+        <irradiance2>1</irradiance2>
+        <radiation2>1</radiation2>
+
+        <latitude>1</latitude>
+        <longitude>1</longitude>
+
+        <accelX>1</accelX>
+        <accelY>1</accelY>
+        <accelZ>1</accelZ>
+
+        <gyroX>1</gyroX>
+        <gyroY>1</gyroY>
+        <gyroZ>1</gyroZ>
+
+        <bearing>1</bearing>
+    </packet>
+
+    <packet>
+        <type>1</type>
+        <hour>1</hour>
+        <minute>1</minute>
+        <second>1</second>
+
+        <pressure1>1</pressure1>
+        <temperature1>1</temperature1>
+        <humidity1>1</humidity1>
+        <irradiance1>1</irradiance1>
+        <radiation1>1</radiation1>
+
+        <pressure2>1</pressure2>
+        <temperature2>1</temperature2>
+        <humidity2>1</humidity2>
+        <irradiance2>1</irradiance2>
+        <radiation2>1</radiation2>
+
+        <latitude>1</latitude>
+        <longitude>1</longitude>
+
+        <accelX>1</accelX>
+        <accelY>1</accelY>
+        <accelZ>1</accelZ>
+
+        <gyroX>1</gyroX>
+        <gyroY>1</gyroY>
+        <gyroZ>1</gyroZ>
+
+        <bearing>1</bearing>
+    </packet>
+</data>
