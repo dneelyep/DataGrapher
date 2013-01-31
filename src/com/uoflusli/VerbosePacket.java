@@ -9,13 +9,13 @@ public class VerbosePacket {
     /** The type of this packet. VerbosePackets should have a type of 4, as specified in the CDR. */
     private int type = 4;
 
-    /** The hour this packet was originally transmitted.*/
+    /** The hour this packet was originally transmitted. */
     private int hour;
 
-    /** The minute this packet was originally transmitted.*/
+    /** The minute this packet was originally transmitted. */
     private int minute;
 
-    /** The second this packet was originally transmitted.*/
+    /** The second this packet was originally transmitted. */
     private int second;
 
     /** The first pressure reading in this packet. */

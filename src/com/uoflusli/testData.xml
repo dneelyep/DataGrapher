@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--Our largest software need, outside of the previously explained software, is having the ability to analyze the
         data we receive. After the competition in April, we have to submit one final report that explains
         our findings. Naturally, graphs and pictures are great ways at illustrating how our systems performed.
@@ -15,161 +16,157 @@ that, we'll have to work together to figure out extra features. -->
 
 <data>
     <packet>
-        <type>1</type>
-        <hour>1</hour>
-        <minute>1</minute>
-        <second>1</second>
+        <Type>1</Type>
+        <Hour>1</Hour>
+        <Minute>1</Minute>
+        <Second>1</Second>
 
-        <pressure1>1</pressure1>
+        <Pressure1>1</Pressure1>
         <temperature1>1</temperature1>
-        <humidity1>1</humidity1>
-        <irradiance1>1</irradiance1>
-        <radiation1>1</radiation1>
+        <Humidity1>1</Humidity1>
+        <Solar_Irradiance1>1</Solar_Irradiance1>
+        <UV_Radiation1>1</UV_Radiation1>
 
-        <pressure2>1</pressure2>
-        <temperature2>1</temperature2>
-        <humidity2>1</humidity2>
-        <irradiance2>1</irradiance2>
-        <radiation2>1</radiation2>
+        <Pressure2>1</Pressure2>
+        <Temperature2>1</Temperature2>
+        <Humidity2>1</Humidity2>
+        <Solar_Irradiance2>1</Solar_Irradiance2>
+        <UV_Radiation2>1</UV_Radiation2>
 
-        <latitude>1</latitude>
-        <longitude>1</longitude>
+        <GPS.Latitude>1</GPS.Latitude>>
+        <GPS.Longitude>1</GPS.Longitude>
 
-        <accelX>1</accelX>
-        <accelY>1</accelY>
-        <accelZ>1</accelZ>
+        <Accelerometer_X>1</Accelerometer_X>
+        <Accelerometer_Y>1</Accelerometer_Y>
+        <Accelerometer_Z>1</Accelerometer_Z>
 
-        <gyroX>1</gyroX>
-        <gyroY>1</gyroY>
-        <gyroZ>1</gyroZ>
+        <Gyro_X>1</Gyro_X>
+        <Gyro_Y>1</Gyro_Y>
+        <Gyro_Z>1</Gyro_Z>
 
         <bearing>1</bearing>
     </packet>
-
     <packet>
-        <type>1</type>
-        <hour>1</hour>
-        <minute>1</minute>
-        <second>1</second>
+        <Type>1</Type>
+        <Hour>1</Hour>
+        <Minute>1</Minute>
+        <Second>1</Second>
 
-        <pressure1>1</pressure1>
+        <Pressure1>1</Pressure1>
         <temperature1>1</temperature1>
-        <humidity1>1</humidity1>
-        <irradiance1>1</irradiance1>
-        <radiation1>1</radiation1>
+        <Humidity1>1</Humidity1>
+        <Solar_Irradiance1>1</Solar_Irradiance1>
+        <UV_Radiotion1>1</UV_Radiotion1>
 
-        <pressure2>1</pressure2>
-        <temperature2>1</temperature2>
-        <humidity2>1</humidity2>
-        <irradiance2>1</irradiance2>
-        <radiation2>1</radiation2>
+        <Pressure2>1</Pressure2>
+        <Temperature2>1</Temperature2>
+        <Humidity2>1</Humidity2>
+        <Solar_Irradiance2>1</Solar_Irradiance2>
+        <UV_Radiotion2>1</UV_Radiotion2>
 
-        <latitude>1</latitude>
-        <longitude>1</longitude>
+        <GPS.Latitude>1</GPS.Latitude>>
+        <GPS.Longitude>1</GPS.Longitude>
 
-        <accelX>1</accelX>
-        <accelY>1</accelY>
-        <accelZ>1</accelZ>
+        <Accelerometer_X>1</Accelerometer_X>
+        <Accelerometer_Y>1</Accelerometer_Y>
+        <Accelerometer_Z>1</Accelerometer_Z>
 
-        <gyroX>1</gyroX>
-        <gyroY>1</gyroY>
-        <gyroZ>1</gyroZ>
+        <Gyro_X>1</Gyro_X>
+        <Gyro_Y>1</Gyro_Y>
+        <Gyro_Z>1</Gyro_Z>
 
         <bearing>1</bearing>
     </packet>
-
     <packet>
-        <type>1</type>
-        <hour>1</hour>
-        <minute>1</minute>
-        <second>1</second>
+        <Type>1</Type>
+        <Hour>1</Hour>
+        <Minute>1</Minute>
+        <Second>1</Second>
 
-        <pressure1>1</pressure1>
+        <Pressure1>1</Pressure1>
         <temperature1>1</temperature1>
-        <humidity1>1</humidity1>
-        <irradiance1>1</irradiance1>
-        <radiation1>1</radiation1>
+        <Humidity1>1</Humidity1>
+        <Solar_Irradiance1>1</Solar_Irradiance1>
+        <UV_Radiotion1>1</UV_Radiotion1>
 
-        <pressure2>1</pressure2>
-        <temperature2>1</temperature2>
-        <humidity2>1</humidity2>
-        <irradiance2>1</irradiance2>
-        <radiation2>1</radiation2>
+        <Pressure2>1</Pressure2>
+        <Temperature2>1</Temperature2>
+        <Humidity2>1</Humidity2>
+        <Solar_Irradiance2>1</Solar_Irradiance2>
+        <UV_Radiotion2>1</UV_Radiotion2>
 
-        <latitude>1</latitude>
-        <longitude>1</longitude>
+        <GPS.Latitude>1</GPS.Latitude>>
+        <GPS.Longitude>1</GPS.Longitude>
 
-        <accelX>1</accelX>
-        <accelY>1</accelY>
-        <accelZ>1</accelZ>
+        <Accelerometer_X>1</Accelerometer_X>
+        <Accelerometer_Y>1</Accelerometer_Y>
+        <Accelerometer_Z>1</Accelerometer_Z>
 
-        <gyroX>1</gyroX>
-        <gyroY>1</gyroY>
-        <gyroZ>1</gyroZ>
+        <Gyro_X>1</Gyro_X>
+        <Gyro_Y>1</Gyro_Y>
+        <Gyro_Z>1</Gyro_Z>
 
         <bearing>1</bearing>
     </packet>
-
     <packet>
-        <type>1</type>
-        <hour>1</hour>
-        <minute>1</minute>
-        <second>1</second>
+        <Type>1</Type>
+        <Hour>1</Hour>
+        <Minute>1</Minute>
+        <Second>1</Second>
 
-        <pressure1>1</pressure1>
+        <Pressure1>1</Pressure1>
         <temperature1>1</temperature1>
-        <humidity1>1</humidity1>
-        <irradiance1>1</irradiance1>
-        <radiation1>1</radiation1>
+        <Humidity1>1</Humidity1>
+        <Solar_Irradiance1>1</Solar_Irradiance1>
+        <UV_Radiotion1>1</UV_Radiotion1>
 
-        <pressure2>1</pressure2>
-        <temperature2>1</temperature2>
-        <humidity2>1</humidity2>
-        <irradiance2>1</irradiance2>
-        <radiation2>1</radiation2>
+        <Pressure2>1</Pressure2>
+        <Temperature2>1</Temperature2>
+        <Humidity2>1</Humidity2>
+        <Solar_Irradiance2>1</Solar_Irradiance2>
+        <UV_Radiotion2>1</UV_Radiotion2>
 
-        <latitude>1</latitude>
-        <longitude>1</longitude>
+        <GPS.Latitude>1</GPS.Latitude>>
+        <GPS.Longitude>1</GPS.Longitude>
 
-        <accelX>1</accelX>
-        <accelY>1</accelY>
-        <accelZ>1</accelZ>
+        <Accelerometer_X>1</Accelerometer_X>
+        <Accelerometer_Y>1</Accelerometer_Y>
+        <Accelerometer_Z>1</Accelerometer_Z>
 
-        <gyroX>1</gyroX>
-        <gyroY>1</gyroY>
-        <gyroZ>1</gyroZ>
+        <Gyro_X>1</Gyro_X>
+        <Gyro_Y>1</Gyro_Y>
+        <Gyro_Z>1</Gyro_Z>
 
         <bearing>1</bearing>
     </packet>
-
     <packet>
-        <type>1</type>
-        <hour>1</hour>
-        <minute>1</minute>
-        <second>1</second>
+        <Type>1</Type>
+        <Hour>1</Hour>
+        <Minute>1</Minute>
+        <Second>1</Second>
 
-        <pressure1>1</pressure1>
+        <Pressure1>1</Pressure1>
         <temperature1>1</temperature1>
-        <humidity1>1</humidity1>
-        <irradiance1>1</irradiance1>
-        <radiation1>1</radiation1>
+        <Humidity1>1</Humidity1>
+        <Solar_Irradiance1>1</Solar_Irradiance1>
+        <UV_Radiotion1>1</UV_Radiotion1>
 
-        <pressure2>1</pressure2>
-        <temperature2>1</temperature2>
-        <humidity2>1</humidity2>
-        <irradiance2>1</irradiance2>
-        <radiation2>1</radiation2>
+        <Pressure2>1</Pressure2>
+        <Temperature2>1</Temperature2>
+        <Humidity2>1</Humidity2>
+        <Solar_Irradiance2>1</Solar_Irradiance2>
+        <UV_Radiotion2>1</UV_Radiotion2>
 
-        <latitude>1</latitude>
-        <longitude>1</longitude>
+        <GPS.Latitude>1</GPS.Latitude>>
+        <GPS.Longitude>1</GPS.Longitude>
 
-        <accelX>1</accelX>
-        <accelY>1</accelY>
-        <accelZ>1</accelZ>
+        <Accelerometer_X>1</Accelerometer_X>
+        <Accelerometer_Y>1</Accelerometer_Y>
+        <Accelerometer_Z>1</Accelerometer_Z>
 
-        <gyroX>1</gyroX>
-        <gyroY>1</gyroY>
-        <gyroZ>1</gyroZ>
+        <Gyro_X>1</Gyro_X>
+        <Gyro_Y>1</Gyro_Y>
+        <Gyro_Z>1</Gyro_Z>
 
         <bearing>1</bearing>
     </packet>
