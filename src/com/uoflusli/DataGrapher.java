@@ -22,10 +22,7 @@ public class DataGrapher {
 
         try {
             dataFile = new Builder().build("src/com/uoflusli/testData.xml");
-        } catch (ParsingException e) {
-            System.err.println("Error parsing data file!");
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParsingException | IOException e) {
             System.err.println("Error parsing data file!");
             e.printStackTrace();
         }
@@ -120,32 +117,4 @@ public class DataGrapher {
             System.out.println(packet.toString());
         }
     }
-
-
-//        System.out.println(root.getChild(1));
-//
-//        System.out.println(root.getChild(1).getChild(1));
-//
-//        System.out.println(root.getChild(1).getChild(1).getValue());
-
-
-//        for (int i = 0; i < root.getChildCount(); i++) {
-//            System.out.println(root.getChild(i));
-//        }
-
-
-            /*try {
-            floorDataFile = new Builder().build(floorPath);
-            Element root = floorDataFile.getRootElement();
-            Elements rangeElements = root.getChildElements();
-
-            // Make an array of Ranges, that's as large as the number of
-            // Ranges stored in the data file.
-            ranges = new ArrayList<>(rangeElements.size());
-
-            for (int i = 0; i < rangeElements.size(); i++) {
-                Element e = rangeElements.get(i);
-                String fileX = e.getFirstChildElement("x").getValue();
-                String fileY = e.getFirstChildElement("y").getValue();*/
-
 }
