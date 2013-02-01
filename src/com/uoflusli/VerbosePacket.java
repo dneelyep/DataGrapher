@@ -9,6 +9,7 @@ public class VerbosePacket {
     // TODO Verify that the types of each of these fields are correct. See specs in CDR
     // or ask Nathan.
 
+    /** A Map from the fields that make up a packet to the readings of those fields. */
     private Map<PacketField, Object> fieldValues = new HashMap<>();
 
     /** Contsruct a new VerbosePacket with all required fields. */
