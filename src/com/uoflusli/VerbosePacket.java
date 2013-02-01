@@ -1,136 +1,92 @@
 package com.uoflusli;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /** Class that represents the payload of a data packet that uses
  * the verbose packet structure. */
 public class VerbosePacket {
     // TODO Verify that the types of each of these fields are correct. See specs in CDR
     // or ask Nathan.
 
-    /** The type of this packet. VerbosePackets should have a type of 4, as specified in the CDR. */
-    private int type = 4;
-
-    /** The hour this packet was originally transmitted. */
-    private int hour;
-
-    /** The minute this packet was originally transmitted. */
-    private int minute;
-
-    /** The second this packet was originally transmitted. */
-    private int second;
-
-    /** The first pressure reading in this packet. */
-    private int pressure1;
-
-    /** The first temperature reading in this packet. */
-    private int temperature1;
-
-    /** The first humidity reading in this packet. */
-    private int humidity1;
-
-    /** The first solar irradiance reading in this packet. */
-    private int irradiance1;
-
-    /** The first UV radiation reading in this packet. */
-    private int radiation1;
-
-    /** The second pressure reading in this packet. */
-    private int pressure2;
-
-    /** The second temperature reading in this packet. */
-    private int temperature2;
-
-    /** The second humidity reading in this packet. */
-    private int humidity2;
-
-    /** The second solar irradiance reading in this packet. */
-    private int irradiance2;
-
-    /** The second UV radiation reading in this packet. */
-    private int radiation2;
-
-    /** The latitude of the SMD at the time this packet was transmitted. */
-    private int latitude;
-
-    /** The longitude of the SMD at the time this packet was transmitted. */
-    private int longitude;
-
-    /** The accelerometer's x reading at the time of packet transmission. */
-    private int accelX;
-
-    /** The accelerometer's y reading at the time of packet transmission. */
-    private int accelY;
-
-    /** The accelerometer's z reading at the time of packet transmission. */
-    private int accelZ;
-
-    /** The gyroscope's x reading at the time of packet transmission. */
-    private int gyroX;
-
-    /** The gyroscope's y reading at the time of packet transmission. */
-    private int gyroY;
-
-    /** The gyroscope's z reading at the time of packet transmission. */
-    private int gyroZ;
-
-    /** The SMD's bearing at the time of packet transmission. */
-    private int bearing;
+    private Map<PacketField, Object> fieldValues = new HashMap<>();
 
     /** Contsruct a new VerbosePacket with all required fields. */
     public VerbosePacket(int hour, int minute, int second, int pressure1, int temperature1, int humidity1,
                          int irradiance1, int radiation1, int pressure2, int temperature2, int humidity2,
-                         int irradiance2, int radiation2, int latitude, int longitude, int accelX, int accelY,
+                         int irradiance2, int radiation2, String latitude, String longitude, int accelX, int accelY,
                          int accelZ, int gyroX, int gyroY, int gyroZ, int bearing) {
 
-        this.hour = hour;
-        this.minute = minute;
-        this.second = second;
-        this.pressure1 = pressure1;
-        this.temperature1 = temperature1;
-        this.humidity1 = humidity1;
-        this.irradiance1 = irradiance1;
-        this.radiation1 = radiation1;
-        this.pressure2 = pressure2;
-        this.temperature2 = temperature2;
-        this.humidity2 = humidity2;
-        this.irradiance2 = irradiance2;
-        this.radiation2 = radiation2;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.accelX = accelX;
-        this.accelY = accelY;
-        this.accelZ = accelZ;
-        this.gyroX = gyroX;
-        this.gyroY = gyroY;
-        this.gyroZ = gyroZ;
-        this.bearing = bearing;
+        fieldValues.put(PacketField.Hour, hour);
+        fieldValues.put(PacketField.Minute, minute);
+        fieldValues.put(PacketField.Second, second);
+        fieldValues.put(PacketField.Pressure1, pressure1);
+        fieldValues.put(PacketField.Temperature1, temperature1);
+        fieldValues.put(PacketField.Humidity1, humidity1);
+        fieldValues.put(PacketField.Solar_Irradiance1, irradiance1);
+        fieldValues.put(PacketField.UV_Radiation1, radiation1);
+        fieldValues.put(PacketField.Pressure2, pressure2);
+        fieldValues.put(PacketField.Temperature2, temperature2);
+        fieldValues.put(PacketField.Humidity2, humidity2);
+        fieldValues.put(PacketField.Solar_Irradiance2, irradiance2);
+        fieldValues.put(PacketField.UV_Radiation2, radiation2);
+        fieldValues.put(PacketField.GPSLatitude, latitude);
+        fieldValues.put(PacketField.GPSLongitude, longitude);
+        fieldValues.put(PacketField.Accelerometer_X, accelX);
+        fieldValues.put(PacketField.Accelerometer_Y, accelY);
+        fieldValues.put(PacketField.Accelerometer_Z, accelZ);
+        fieldValues.put(PacketField.Gyro_X, gyroX);
+        fieldValues.put(PacketField.Gyro_Y, gyroY);
+        fieldValues.put(PacketField.Gyro_Z, gyroZ);
+        fieldValues.put(PacketField.Bearing, bearing);
     }
 
     /** Print out a string representation of this VerbosePacket. */
+    @Override
     public String toString() {
-        return "Time: " + hour + ":" + minute + ":" + second + "\n" +
+        return "Time: " + fieldValues.get(PacketField.Hour) + ":"
+                + fieldValues.get(PacketField.Minute) + ":" + fieldValues.get(PacketField.Second)+ "\n" +
 
-               "Reading 1:" +
-               "Pressure: " + pressure1 +
-               "Temperature: " + temperature1 +
-               "Humidity: " + humidity1 +
-               "Solar Irradiance: " + irradiance1 +
-               "UV Radiation: " + radiation1 + "\n" +
+               "Reading 1:" + "\n" +
+               "Pressure: " + fieldValues.get(PacketField.Pressure1) + "\n" +
+               "Temperature: " + fieldValues.get(PacketField.Temperature1) + "\n" +
+               "Humidity: " + fieldValues.get(PacketField.Humidity1) + "\n" +
+               "Solar Irradiance: " + fieldValues.get(PacketField.Solar_Irradiance1) + "\n" +
+               "UV Radiation: " + fieldValues.get(PacketField.UV_Radiation1) + "\n" +
 
-               "Reading 2:" +
-               "Pressure: " + pressure2 +
-               "Temperature: " + temperature2 +
-               "Humidity: " + humidity2 +
-               "Solar Irradiance: " + irradiance2 +
-               "UV Radiation: " + radiation2 + "\n" +
+                "Reading 2:" + "\n" +
+                "Pressure: " + fieldValues.get(PacketField.Pressure2) + "\n" +
+                "Temperature: " + fieldValues.get(PacketField.Temperature2) + "\n" +
+                "Humidity: " + fieldValues.get(PacketField.Humidity2) + "\n" +
+                "Solar Irradiance: " + fieldValues.get(PacketField.Solar_Irradiance2) + "\n" +
+                "UV Radiation: " + fieldValues.get(PacketField.UV_Radiation2) + "\n" +
 
-               "Latitude: " + latitude +
-               "Longitude: " + longitude +
-               "Accelerometer - X: " + accelX +
-               "Accelerometer - Y: " + accelY +
-               "Accelerometer - Z: " + accelZ +
-               "Gyroscope - X: " + gyroX +
-               "Gyroscope - Y: " + gyroY +
-               "Gyroscope - Z: " + gyroZ +
-               "Bearing: " + bearing;
+               "Latitude: " + fieldValues.get(PacketField.GPSLatitude) + "\n" +
+               "Longitude: " + fieldValues.get(PacketField.GPSLongitude) + "\n" +
+               "Accelerometer - X: " + fieldValues.get(PacketField.Accelerometer_X) + "\n" +
+               "Accelerometer - Y: " + fieldValues.get(PacketField.Accelerometer_Y) + "\n" +
+               "Accelerometer - Z: " + fieldValues.get(PacketField.Accelerometer_Z) + "\n" +
+               "Gyroscope - X: " + fieldValues.get(PacketField.Gyro_X) + "\n" +
+               "Gyroscope - Y: " + fieldValues.get(PacketField.Gyro_Y) + "\n" +
+               "Gyroscope - Z: " + fieldValues.get(PacketField.Gyro_Z) + "\n" +
+               "Bearing: " + fieldValues.get(PacketField.Bearing) + "\n\n";
+    }
+}
+
+enum PacketField {
+    Type("Type"), Hour("Hour"), Minute("Minute"), Second("Second"), Pressure1("Pressure1"),
+    Temperature1("Temperature1"), Humidity1("Humidity1"), Solar_Irradiance1("Solar_Irradiance1"),
+    UV_Radiation1("UV_Radiation1"), Pressure2("Pressure2"), Temperature2("Temperature2"),
+    Humidity2("Humidity2"), Solar_Irradiance2("Solar_Irradiance2"), UV_Radiation2("UV_Radiation2"),
+    GPSLatitude("GPS.Latitude"), GPSLongitude("GPS.Longitude"), Accelerometer_X("Accelerometer_X"),
+    Accelerometer_Y("Accelerometer_Y"), Accelerometer_Z("Accelerometer_Z"), Gyro_X("Gyro_X"), Gyro_Y("Gyro_Y"),
+    Gyro_Z("Gyro_Z"), Bearing("Bearing");
+
+    // TODO Check if latitude/longitude are stored as an int, a string, or maybe a series of ints where each int represents precision.
+    /** A string representation of the field name. */
+    private String stringRep;
+
+    PacketField(String stringRep) {
+        this.stringRep = stringRep;
     }
 }

@@ -17,6 +17,37 @@ that, we'll have to work together to figure out extra features. -->
 <data>
     <packet>
         <Type>1</Type>
+        <Hour>13</Hour>
+        <Minute>15</Minute>
+        <Second>38</Second>
+
+        <Pressure1>12</Pressure1>
+        <Temperature1>40</Temperature1>
+        <Humidity1>10</Humidity1>
+        <Solar_Irradiance1>11</Solar_Irradiance1>
+        <UV_Radiation1>20</UV_Radiation1>
+
+        <Pressure2>70</Pressure2>
+        <Temperature2>38</Temperature2>
+        <Humidity2>18</Humidity2>
+        <Solar_Irradiance2>21</Solar_Irradiance2>
+        <UV_Radiation2>100</UV_Radiation2>
+
+        <GPS.Latitude>80*70'10"</GPS.Latitude>>
+        <GPS.Longitude>120*45'24"</GPS.Longitude>
+
+        <Accelerometer_X>7</Accelerometer_X>
+        <Accelerometer_Y>10</Accelerometer_Y>
+        <Accelerometer_Z>13</Accelerometer_Z>
+
+        <Gyro_X>8</Gyro_X>
+        <Gyro_Y>9</Gyro_Y>
+        <Gyro_Z>13</Gyro_Z>
+
+        <Bearing>24</Bearing>
+    </packet>
+    <packet>
+        <Type>1</Type>
         <Hour>1</Hour>
         <Minute>1</Minute>
         <Second>1</Second>
@@ -56,44 +87,13 @@ that, we'll have to work together to figure out extra features. -->
         <Temperature1>1</Temperature1>
         <Humidity1>1</Humidity1>
         <Solar_Irradiance1>1</Solar_Irradiance1>
-        <UV_Radiotion1>1</UV_Radiotion1>
+        <UV_Radiation1>1</UV_Radiation1>
 
         <Pressure2>1</Pressure2>
         <Temperature2>1</Temperature2>
         <Humidity2>1</Humidity2>
         <Solar_Irradiance2>1</Solar_Irradiance2>
-        <UV_Radiotion2>1</UV_Radiotion2>
-
-        <GPS.Latitude>1</GPS.Latitude>>
-        <GPS.Longitude>1</GPS.Longitude>
-
-        <Accelerometer_X>1</Accelerometer_X>
-        <Accelerometer_Y>1</Accelerometer_Y>
-        <Accelerometer_Z>1</Accelerometer_Z>
-
-        <Gyro_X>1</Gyro_X>
-        <Gyro_Y>1</Gyro_Y>
-        <Gyro_Z>1</Gyro_Z>
-
-        <Bearing>1</Bearing>
-    </packet>
-    <packet>
-        <Type>1</Type>
-        <Hour>1</Hour>
-        <Minute>1</Minute>
-        <Second>1</Second>
-
-        <Pressure1>1</Pressure1>
-        <Temperature1>1</Temperature1>
-        <Humidity1>1</Humidity1>
-        <Solar_Irradiance1>1</Solar_Irradiance1>
-        <UV_Radiotion1>1</UV_Radiotion1>
-
-        <Pressure2>1</Pressure2>
-        <Temperature2>1</Temperature2>
-        <Humidity2>1</Humidity2>
-        <Solar_Irradiance2>1</Solar_Irradiance2>
-        <UV_Radiotion2>1</UV_Radiotion2>
+        <UV_Radiation2>1</UV_Radiation2>
 
         <GPS.Latitude>1</GPS.Latitude>>
         <GPS.Longitude>1</GPS.Longitude>
@@ -118,13 +118,13 @@ that, we'll have to work together to figure out extra features. -->
         <Temperature1>1</Temperature1>
         <Humidity1>1</Humidity1>
         <Solar_Irradiance1>1</Solar_Irradiance1>
-        <UV_Radiotion1>1</UV_Radiotion1>
+        <UV_Radiation1>1</UV_Radiation1>
 
         <Pressure2>1</Pressure2>
         <Temperature2>1</Temperature2>
         <Humidity2>1</Humidity2>
         <Solar_Irradiance2>1</Solar_Irradiance2>
-        <UV_Radiotion2>1</UV_Radiotion2>
+        <UV_Radiation2>1</UV_Radiation2>
 
         <GPS.Latitude>1</GPS.Latitude>>
         <GPS.Longitude>1</GPS.Longitude>
@@ -149,13 +149,13 @@ that, we'll have to work together to figure out extra features. -->
         <Temperature1>1</Temperature1>
         <Humidity1>1</Humidity1>
         <Solar_Irradiance1>1</Solar_Irradiance1>
-        <UV_Radiotion1>1</UV_Radiotion1>
+        <UV_Radiation1>1</UV_Radiation1>
 
         <Pressure2>1</Pressure2>
         <Temperature2>1</Temperature2>
         <Humidity2>1</Humidity2>
         <Solar_Irradiance2>1</Solar_Irradiance2>
-        <UV_Radiotion2>1</UV_Radiotion2>
+        <UV_Radiation2>1</UV_Radiation2>
 
         <GPS.Latitude>1</GPS.Latitude>>
         <GPS.Longitude>1</GPS.Longitude>
