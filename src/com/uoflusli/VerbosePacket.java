@@ -10,7 +10,7 @@ public class VerbosePacket {
     // or ask Nathan.
 
     /** A Map from the fields that make up a packet to the readings of those fields. */
-    private Map<PacketField, Object> fieldValues = new HashMap<>();
+    private HashMap<PacketField, Object> fieldValues = new HashMap<>();
 
     /** Contsruct a new VerbosePacket with all required fields. */
     public VerbosePacket(int hour, int minute, int second, int pressure1, int temperature1, int humidity1,
@@ -71,6 +71,11 @@ public class VerbosePacket {
                "Gyroscope - Y: " + fieldValues.get(PacketField.Gyro_Y) + "\n" +
                "Gyroscope - Z: " + fieldValues.get(PacketField.Gyro_Z) + "\n" +
                "Bearing: " + fieldValues.get(PacketField.Bearing) + "\n\n";
+    }
+
+    /** Get a Map of this VerbosePacket's various field values. */
+    public HashMap<PacketField, Object> getFieldValues() {
+        return fieldValues;
     }
 }
 

@@ -2,7 +2,11 @@ package com.uoflusli;
 
 import nu.xom.*;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,7 +37,7 @@ public class DataGrapher {
             System.out.println(packet.toString());
         }
 
-        graphReadings(packets);
+        write(packets);
     }
 
     /** Read the contents of the provided dataFile, storing readings in the
@@ -121,30 +125,37 @@ public class DataGrapher {
         }
     }
 
-    /** Graph out the values of the provided list of VerbosePackets.  */
-    private void graphReadings(ArrayList<VerbosePacket> packets) {
-        //
-        // Your software should be able to plot all atmospheric data, accelerometer data,
-        // and gyroscope data versus time AND latitude & longitude (two separate graphs).
-//        Needed graphs:
-//        ** Atmospheric data (pressure, temperature, humidity, irradiance, radiation, readings 1 and 2)
-//        *** vs. time
-//        *** vs. latitude
-//        *** vs. longitude
+    /** Write out the provided list of packets into an output file, data.csv,
+     * in the form:
+     *
+     * type|hour|minute|second|pressure1|temperature1|humidity1|irradiance1|radiation1|pressure2|temperature2|
+     * humidity2|irradiance2|radiation2|String latitude|String longitude|accelX|accelY|accelZ|gyroX|gyroY|gyroZ|bearing
+     *
+     * (without a newline). */
+    private void write(ArrayList<VerbosePacket> packets) {
+        try {
+            FileWriter writer = new FileWriter("data.csv", false);
+            PrintWriter printWriter = new PrintWriter(writer);
 
-//        ** Accelerometer data (AccelX/Y/Z)
-//        *** vs. time
-//        *** vs. latitude
-//        *** vs. longitude
+            for (VerbosePacket packet : packets) {
+                // We list everything manually here, because PacketField.keySet() does not iterate through each field
+                // in the original order, which screws up the CSV file.
+                for (PacketField field : Arrays.asList(PacketField.Hour, PacketField.Minute, PacketField.Second,
+                        PacketField.Pressure1, PacketField.Temperature1, PacketField.Humidity1, PacketField.Solar_Irradiance1,
+                        PacketField.UV_Radiation1, PacketField.Pressure2, PacketField.Temperature2, PacketField.Humidity2,
+                        PacketField.Solar_Irradiance2, PacketField.UV_Radiation2, PacketField.GPSLatitude, PacketField.GPSLongitude,
+                        PacketField.Accelerometer_X, PacketField.Accelerometer_Y, PacketField.Accelerometer_Z, PacketField.Gyro_X,
+                        PacketField.Gyro_Y, PacketField.Gyro_Z, PacketField.Bearing)) {
 
-//        ** Gyroscope data (Gyro_X/Y/Z)
-//        *** vs. time
-//        *** vs. latitude
-//        *** vs. longitude
-//
-//        ** Bearing data
-//        *** vs. time
-//        *** vs. latitude
-//        *** vs. longitude
+                    printWriter.print(packet.getFieldValues().get(field) + "|"); // TODO Get rid of the end of line pipe here.
+                }
+                printWriter.println();
+            }
+
+            printWriter.close();
+        } catch (IOException e) {
+            System.err.println("Could not write data to CSV file!");
+            e.printStackTrace();
+        }
     }
 }
