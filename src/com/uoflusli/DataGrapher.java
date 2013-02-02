@@ -4,6 +4,7 @@ import nu.xom.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /** Class that will, given an XML data file to parse, generate graphs
  * of various ship parameters, usually with respect to time. */
@@ -66,7 +67,7 @@ public class DataGrapher {
         int packetGyroZ = -9000;
         int packetBearing = -9000;
 
-        for (int packet = 0; packet <root.getChildCount(); packet++) {
+        for (int packet = 0; packet < root.getChildCount(); packet++) {
 
             if (root.getChild(packet) instanceof Element && ((Element) root.getChild(packet)).getQualifiedName().equals("packet")) {
                 // Iterate through all data readings in a packet.
@@ -75,6 +76,9 @@ public class DataGrapher {
                     if (root.getChild(packet).getChild(dataReading) instanceof Element) {
                         Node data = root.getChild(packet).getChild(dataReading);
 
+                        // TODO Make unit tests for this code. Make sure to cover all cases mentioned in the Message
+                        // Lengths spreadsheet. IE: Test all combinations of optional/required packets, make sure that
+                        // data will always be parsed correctly.
                         // TODO Make an enum or similar to clean up this code. Rather than a big switch
                         // statement, store string representation in the enum.
                         // TODO For the 14-bit padded int data types (See Message Lengths.xslx), make sure
@@ -117,8 +121,30 @@ public class DataGrapher {
         }
     }
 
-        /** Graph out the values of the provided list of VerbosePackets.  */
+    /** Graph out the values of the provided list of VerbosePackets.  */
     private void graphReadings(ArrayList<VerbosePacket> packets) {
+        //
+        // Your software should be able to plot all atmospheric data, accelerometer data,
+        // and gyroscope data versus time AND latitude & longitude (two separate graphs).
+//        Needed graphs:
+//        ** Atmospheric data (pressure, temperature, humidity, irradiance, radiation, readings 1 and 2)
+//        *** vs. time
+//        *** vs. latitude
+//        *** vs. longitude
 
+//        ** Accelerometer data (AccelX/Y/Z)
+//        *** vs. time
+//        *** vs. latitude
+//        *** vs. longitude
+
+//        ** Gyroscope data (Gyro_X/Y/Z)
+//        *** vs. time
+//        *** vs. latitude
+//        *** vs. longitude
+//
+//        ** Bearing data
+//        *** vs. time
+//        *** vs. latitude
+//        *** vs. longitude
     }
 }
