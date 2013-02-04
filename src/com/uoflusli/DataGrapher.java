@@ -30,11 +30,12 @@ public class DataGrapher {
             e.printStackTrace();
         }
 
-        for (VerbosePacket packet : packets) {
-            System.out.println(packet.toString());
+        try {
+            write(packets);
+        } catch (IOException e) {
+            System.err.println("Could not write data to CSV file!");
+            e.printStackTrace();
         }
-
-        write(packets);
     }
 
     /** Read the contents of the provided dataFile, storing readings in the
@@ -44,37 +45,29 @@ public class DataGrapher {
 
         Element root = dataFile.getRootElement();
 
-        for (int packet = 0; packet < root.getChildCount(); packet++) {
+        for (int packet = 0; packet < root.getChildElements("packet").size(); packet++) {
+            Element currentPacket = root.getChildElements().get(packet);
 
-            if (root.getChild(packet) instanceof Element && ((Element) root.getChild(packet)).getQualifiedName().equals("packet")) {
-                // Iterate through all data readings in a packet.
-                for (int dataReading = 0; dataReading < root.getChild(packet).getChildCount(); dataReading++) {
+            // Iterate through all data readings in a packet.
+            for (int dataReading = 0; dataReading < currentPacket.getChildElements().size(); dataReading++) {
+                Element data = currentPacket.getChildElements().get(dataReading);
 
-                    if (root.getChild(packet).getChild(dataReading) instanceof Element) {
-                        Node data = root.getChild(packet).getChild(dataReading);
-
-                        // TODO Test all combinations of optional/required packets, make sure that
-                        // data will always be parsed correctly.
-                        // TODO Make an enum or similar to clean up this code. Rather than a big switch
-                        // statement, store string representation in the enum.
-                        // TODO For the 14-bit padded int data types (See Message Lengths.xslx), make sure
-                        // if they are padded to the left or right. EG 00xxxx or xxxx00. If padded to the right,
-                        // I will need to substring them to remove the unneeded 0s.
-                        for (PacketField field : PacketField.values()) {
-                            if (field.toString().equals( ((Element) root.getChild(packet).getChild(dataReading)).getQualifiedName() )) {
-
-                                packetFields.put(field,
-                                        (field.toString().equals("GPS.Latitude") || field.toString().equals("GPS.Longitude")
-                                                ? data.getValue() : Integer.parseInt(data.getValue()) ) );
-
-                            }
-                        }
-
+                // TODO Test all combinations of optional/required packets, make sure that
+                // data will always be parsed correctly.
+                // TODO For the 14-bit padded int data types (See Message Lengths.xslx), make sure
+                // if they are padded to the left or right. EG 00xxxx or xxxx00. If padded to the right,
+                // I will need to substring them to remove the unneeded 0s.
+                for (PacketField field : PacketField.values()) {
+                    if ( field.toString().equals(data.getQualifiedName()) ) {
+                        if (field.toString().equals("GPS.Latitude") || field.toString().equals("GPS.Longitude"))
+                            packetFields.put(field, data.getValue());
+                        else
+                            packetFields.put(field, Integer.parseInt(data.getValue()));
                     }
                 }
-
-                packets.add(new VerbosePacket(packetFields));
             }
+
+            packets.add(new VerbosePacket(packetFields));
         }
     }
 
@@ -83,25 +76,20 @@ public class DataGrapher {
      * type|hour|minute|second|pressure1|temperature1|humidity1|irradiance1|radiation1|pressure2|temperature2|
      * humidity2|irradiance2|radiation2|String latitude|String longitude|accelX|accelY|accelZ|gyroX|gyroY|gyroZ|bearing
      * (without a newline). */
-    private void write(ArrayList<VerbosePacket> packets) {
-        try {
-            FileWriter writer = new FileWriter("data.csv", false);
-            PrintWriter printWriter = new PrintWriter(writer);
+    private void write(ArrayList<VerbosePacket> packets) throws IOException {
+        FileWriter writer = new FileWriter("data.csv", false);
+        PrintWriter printWriter = new PrintWriter(writer);
 
-            for (VerbosePacket packet : packets) {
-                for (PacketField field : PacketField.values()) {
-                    printWriter.print(packet.getFieldValues().get(field));
+        for (VerbosePacket packet : packets) {
+            for (PacketField field : PacketField.values()) {
+                printWriter.print(packet.getFieldValues().get(field));
 
-                    if (field != PacketField.Bearing) // Don't print an extra | symbol to the right of the csv values.
-                        printWriter.print("|");
-                }
-                printWriter.println();
+                if (field != PacketField.Bearing) // Don't print an extra | symbol to the right of the csv values.
+                    printWriter.print("|");
             }
-
-            printWriter.close();
-        } catch (IOException e) {
-            System.err.println("Could not write data to CSV file!");
-            e.printStackTrace();
+            printWriter.println();
         }
+
+        printWriter.close();
     }
 }
