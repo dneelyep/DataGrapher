@@ -8,38 +8,12 @@ import java.util.Map;
 public class VerbosePacket {
     // TODO Verify that the types of each of these fields are correct. See specs in CDR
     // or ask Nathan.
-
     /** A Map from the fields that make up a packet to the readings of those fields. */
     private HashMap<PacketField, Object> fieldValues = new HashMap<>();
 
-    /** Contsruct a new VerbosePacket with all required fields. */
-    public VerbosePacket(int hour, int minute, int second, int pressure1, int temperature1, int humidity1,
-                         int irradiance1, int radiation1, int pressure2, int temperature2, int humidity2,
-                         int irradiance2, int radiation2, String latitude, String longitude, int accelX, int accelY,
-                         int accelZ, int gyroX, int gyroY, int gyroZ, int bearing) {
-
-        fieldValues.put(PacketField.Hour, hour);
-        fieldValues.put(PacketField.Minute, minute);
-        fieldValues.put(PacketField.Second, second);
-        fieldValues.put(PacketField.Pressure1, pressure1);
-        fieldValues.put(PacketField.Temperature1, temperature1);
-        fieldValues.put(PacketField.Humidity1, humidity1);
-        fieldValues.put(PacketField.Solar_Irradiance1, irradiance1);
-        fieldValues.put(PacketField.UV_Radiation1, radiation1);
-        fieldValues.put(PacketField.Pressure2, pressure2);
-        fieldValues.put(PacketField.Temperature2, temperature2);
-        fieldValues.put(PacketField.Humidity2, humidity2);
-        fieldValues.put(PacketField.Solar_Irradiance2, irradiance2);
-        fieldValues.put(PacketField.UV_Radiation2, radiation2);
-        fieldValues.put(PacketField.GPSLatitude, latitude);
-        fieldValues.put(PacketField.GPSLongitude, longitude);
-        fieldValues.put(PacketField.Accelerometer_X, accelX);
-        fieldValues.put(PacketField.Accelerometer_Y, accelY);
-        fieldValues.put(PacketField.Accelerometer_Z, accelZ);
-        fieldValues.put(PacketField.Gyro_X, gyroX);
-        fieldValues.put(PacketField.Gyro_Y, gyroY);
-        fieldValues.put(PacketField.Gyro_Z, gyroZ);
-        fieldValues.put(PacketField.Bearing, bearing);
+    /** Contsruct a new VerbosePacket using a HashMap that contains all required fields. */
+    public VerbosePacket(HashMap<PacketField, Object> readings) {
+        fieldValues = (HashMap<PacketField, Object>) readings.clone();
     }
 
     /** Print out a string representation of this VerbosePacket. */
@@ -91,6 +65,12 @@ enum PacketField {
     // TODO Check if latitude/longitude are stored as an int, a string, or maybe a series of ints where each int represents precision.
     /** A string representation of the field name. */
     private String stringRep;
+
+    /** Get the String representation of this PacketField. */
+    @Override
+    public String toString() {
+        return stringRep;
+    }
 
     PacketField(String stringRep) {
         this.stringRep = stringRep;

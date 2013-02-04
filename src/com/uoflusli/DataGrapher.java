@@ -5,10 +5,8 @@ import nu.xom.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 
 /** Class that will, given an XML data file to parse, generate graphs
  * of various ship parameters, usually with respect to time. */
@@ -22,11 +20,10 @@ public class DataGrapher {
     }
 
     public DataGrapher() {
-        Document dataFile = null; // TODO No need to initialize to null here.
         packets = new ArrayList<>();
 
         try {
-            dataFile = new Builder().build("src/com/uoflusli/testData.xml");
+            Document dataFile = new Builder().build("src/com/uoflusli/testData.xml");
             readFile(dataFile);
         } catch (ParsingException | IOException e) {
             System.err.println("Error parsing data file!");
@@ -43,33 +40,9 @@ public class DataGrapher {
     /** Read the contents of the provided dataFile, storing readings in the
      * packets list. */
     private void readFile(Document dataFile) {
-        Element root = dataFile.getRootElement();
+        HashMap<PacketField, Object> packetFields = new HashMap<>();
 
-        // TODO This is a hack.
-        // Initialize all types to very odd values to indicate error.
-        int packetType = -9000;
-        int packetHour = -9000;
-        int packetMinute = -9000;
-        int packetSecond = -9000;
-        int packetPressure1 = -9000;
-        int packetTemperature1 = -9000;
-        int packetHumidity1 = -9000;
-        int packetIrradiance1 = -9000;
-        int packetRadiation1 = -9000;
-        int packetPressure2 = -9000;
-        int packetTemperature2 = -9000;
-        int packetHumidity2 = -9000;
-        int packetIrradiance2 = -9000;
-        int packetRadiation2 = -9000;
-        String packetLatitude = "-9000";
-        String packetLongitude = "-9000";
-        int packetAccelX = -9000;
-        int packetAccelY = -9000;
-        int packetAccelZ = -9000;
-        int packetGyroX = -9000;
-        int packetGyroY = -9000;
-        int packetGyroZ = -9000;
-        int packetBearing = -9000;
+        Element root = dataFile.getRootElement();
 
         for (int packet = 0; packet < root.getChildCount(); packet++) {
 
@@ -80,57 +53,35 @@ public class DataGrapher {
                     if (root.getChild(packet).getChild(dataReading) instanceof Element) {
                         Node data = root.getChild(packet).getChild(dataReading);
 
-                        // TODO Make unit tests for this code. Make sure to cover all cases mentioned in the Message
-                        // Lengths spreadsheet. IE: Test all combinations of optional/required packets, make sure that
+                        // TODO Test all combinations of optional/required packets, make sure that
                         // data will always be parsed correctly.
                         // TODO Make an enum or similar to clean up this code. Rather than a big switch
                         // statement, store string representation in the enum.
                         // TODO For the 14-bit padded int data types (See Message Lengths.xslx), make sure
                         // if they are padded to the left or right. EG 00xxxx or xxxx00. If padded to the right,
                         // I will need to substring them to remove the unneeded 0s.
-                        switch (((Element) root.getChild(packet).getChild(dataReading)).getQualifiedName()) {
-                            case "Type": packetType = Integer.parseInt(data.getValue()); break;
-                            case "Hour": packetHour = Integer.parseInt(data.getValue()); break;
-                            case "Minute": packetMinute = Integer.parseInt(data.getValue()); break;
-                            case "Second": packetSecond = Integer.parseInt(data.getValue()); break;
-                            case "Pressure1": packetPressure1 = Integer.parseInt(data.getValue()); break;
-                            case "Temperature1": packetTemperature1 = Integer.parseInt(data.getValue()); break;
-                            case "Humidity1": packetHumidity1 = Integer.parseInt(data.getValue()); break;
-                            case "Solar_Irradiance1": packetIrradiance1 = Integer.parseInt(data.getValue()); break;
-                            case "UV_Radiation1": packetRadiation1 = Integer.parseInt(data.getValue()); break;
-                            case "Pressure2": packetPressure2 = Integer.parseInt(data.getValue()); break;
-                            case "Temperature2": packetTemperature2 = Integer.parseInt(data.getValue()); break;
-                            case "Humidity2": packetHumidity2 = Integer.parseInt(data.getValue()); break;
-                            case "Solar_Irradiance2": packetIrradiance2 = Integer.parseInt(data.getValue()); break;
-                            case "UV_Radiation2": packetRadiation2 = Integer.parseInt(data.getValue()); break;
-                            case "GPS.Latitude": packetLatitude = data.getValue(); break;
-                            case "GPS.Longitude": packetLongitude = data.getValue(); break;
-                            case "Accelerometer_X": packetAccelX = Integer.parseInt(data.getValue()); break;
-                            case "Accelerometer_Y": packetAccelY = Integer.parseInt(data.getValue()); break;
-                            case "Accelerometer_Z": packetAccelZ = Integer.parseInt(data.getValue()); break;
-                            case "Gyro_X": packetGyroX = Integer.parseInt(data.getValue()); break;
-                            case "Gyro_Y": packetGyroY = Integer.parseInt(data.getValue()); break;
-                            case "Gyro_Z": packetGyroZ = Integer.parseInt(data.getValue()); break;
-                            case "Bearing": packetBearing = Integer.parseInt(data.getValue()); break;
+                        for (PacketField field : PacketField.values()) {
+                            if (field.toString().equals( ((Element) root.getChild(packet).getChild(dataReading)).getQualifiedName() )) {
+
+                                packetFields.put(field,
+                                        (field.toString().equals("GPS.Latitude") || field.toString().equals("GPS.Longitude")
+                                                ? data.getValue() : Integer.parseInt(data.getValue()) ) );
+
+                            }
                         }
+
                     }
                 }
 
-                packets.add(new VerbosePacket(packetHour, packetMinute, packetSecond, packetPressure1,
-                        packetTemperature1, packetHumidity1, packetIrradiance1, packetRadiation1, packetPressure2,
-                        packetTemperature2, packetHumidity2, packetIrradiance2, packetRadiation2, packetLatitude,
-                        packetLongitude, packetAccelX, packetAccelY, packetAccelZ, packetGyroX, packetGyroY,
-                        packetGyroZ, packetBearing));
+                packets.add(new VerbosePacket(packetFields));
             }
         }
     }
 
-    /** Write out the provided list of packets into an output file, data.csv,
-     * in the form:
+    /** Write out the provided list of packets into an output file named data.csv in the form:
      *
      * type|hour|minute|second|pressure1|temperature1|humidity1|irradiance1|radiation1|pressure2|temperature2|
      * humidity2|irradiance2|radiation2|String latitude|String longitude|accelX|accelY|accelZ|gyroX|gyroY|gyroZ|bearing
-     *
      * (without a newline). */
     private void write(ArrayList<VerbosePacket> packets) {
         try {
@@ -138,16 +89,11 @@ public class DataGrapher {
             PrintWriter printWriter = new PrintWriter(writer);
 
             for (VerbosePacket packet : packets) {
-                // We list everything manually here, because PacketField.keySet() does not iterate through each field
-                // in the original order, which screws up the CSV file.
-                for (PacketField field : Arrays.asList(PacketField.Hour, PacketField.Minute, PacketField.Second,
-                        PacketField.Pressure1, PacketField.Temperature1, PacketField.Humidity1, PacketField.Solar_Irradiance1,
-                        PacketField.UV_Radiation1, PacketField.Pressure2, PacketField.Temperature2, PacketField.Humidity2,
-                        PacketField.Solar_Irradiance2, PacketField.UV_Radiation2, PacketField.GPSLatitude, PacketField.GPSLongitude,
-                        PacketField.Accelerometer_X, PacketField.Accelerometer_Y, PacketField.Accelerometer_Z, PacketField.Gyro_X,
-                        PacketField.Gyro_Y, PacketField.Gyro_Z, PacketField.Bearing)) {
+                for (PacketField field : PacketField.values()) {
+                    printWriter.print(packet.getFieldValues().get(field));
 
-                    printWriter.print(packet.getFieldValues().get(field) + "|"); // TODO Get rid of the end of line pipe here.
+                    if (field != PacketField.Bearing) // Don't print an extra | symbol to the right of the csv values.
+                        printWriter.print("|");
                 }
                 printWriter.println();
             }
