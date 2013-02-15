@@ -46,50 +46,46 @@ gui_State = struct('gui_Name',       mfilename, ...
                                                                                                            
                                                                                                            % --- Executes just before GUI is made visible.
                                                                                                            function GUI_OpeningFcn(hObject, eventdata, handles, varargin)
-                                                                                                           % This function has no output args, see OutputFcn.
-                                                                                                           % hObject    handle to figure
-                                                                                                           % eventdata  reserved - to be defined in a future version of MATLAB
-                                                                                                           % handles    structure with handles and user data (see GUIDATA)
-                                                                                                           % varargin   command line arguments to GUI (see VARARGIN)
+                                                                                                           
+                                                                                                           global gyroXs gyroYs gyroZs
                                                                                                            
                                                                                                            % Choose default command line output for GUI
                                                                                                            handles.output = hObject;
                                                                                                            
                                                                                                            % Update handles structure
                                                                                                            guidata(hObject, handles);
-                                                                                                           set(findobj('Tag', 'lightVsTime'), 'UserData', [1,1,1;3,3,3]);
                                                                                                            
-                                                                                                           % TODO Add another plot for the second irradiance reading.
-                                                                                                           plot(handles.lightVsTime, 1 : length(cell2mat(varargin(2))), cell2mat(varargin(2)))
-                                                                                                           plot(handles.pressureVsTime, 1 : length(cell2mat(varargin(3))), cell2mat(varargin(3)))
-                                                                                                           plot(handles.temperatureVsTime, 1 : length(cell2mat(varargin(4))), cell2mat(varargin(4)))
-                                                                                                           
-                                                                                                           numberOfReadings = length(cell2mat(varargin(2)));
+                                                                                                           numberOfReadings = length(cell2mat(varargin(2))) - 1;
                                                                                                            set(handles.timeSlider, 'Max', numberOfReadings);
                                                                                                            set(handles.timeSlider, 'SliderStep', [numberOfReadings/100 3]);
                                                                                                            
                                                                                                            set(handles.animSpeedSlider, 'SliderStep', [1/100, 1/10])
                                                                                                            set(handles.animSpeedSlider, 'Max', 20);
                                                                                                            
-                                                                                                           % Set up the rocket display.
-                                                                                                           axes(handles.rocketSim);
+                                                                                                           plot(handles.lightVsTime, 1 : length(cell2mat(varargin(2))), cell2mat(varargin(2)), 1 : length(cell2mat(varargin(9))), cell2mat(varargin(9)))
+                                                                                                           plot(handles.pressureVsTime, 1 : length(cell2mat(varargin(3))), cell2mat(varargin(3)), 1 : length(cell2mat(varargin(10))), cell2mat(varargin(10)))
+                                                                                                           plot(handles.temperatureVsTime, 1 : length(cell2mat(varargin(4))), cell2mat(varargin(4)), 1 : length(cell2mat(varargin(11))), cell2mat(varargin(11)))
+                                                                                                           
                                                                                                            rocketCoords = cell2mat(varargin(5));
-                                                                                                           global X Y Z
                                                                                                            X = rocketCoords(1:2, 1:21);
                                                                                                            Y = rocketCoords(1:2, 22:42);
                                                                                                            Z = rocketCoords(1:2, 43:63);
-                                                                                                           surf(X, Y, Z);
+                                                                                                           surf(handles.rocketSim, X, Y, Z);
+                                                                                                           rotate3d(handles.rocketSim); % Allow the plot to be rotated.
+                                                                                                           
+                                                                                                           gyroXs = cell2mat(varargin(6));
+                                                                                                           gyroYs = cell2mat(varargin(7));
+                                                                                                           gyroZs = cell2mat(varargin(8));
+                                                                                                           
+                                                                                                           xlabel(handles.rocketSim, 'X');
+                                                                                                           ylabel(handles.rocketSim, 'Y');
+                                                                                                           zlabel(handles.rocketSim, 'Z');
                                                                                                            
                                                                                                            % UIWAIT makes GUI wait for user response (see UIRESUME)
                                                                                                            % uiwait(handles.guiWindow);
                                                                                                            
                                                                                                            % --- Outputs from this function are returned to the command line.
                                                                                                            function varargout = GUI_OutputFcn(hObject, eventdata, handles) 
-                                                                                                           % varargout  cell array for returning output args (see VARARGOUT);
-                                                                                                           % hObject    handle to figure
-                                                                                                           % eventdata  reserved - to be defined in a future version of MATLAB
-                                                                                                           % handles    structure with handles and user data (see GUIDATA)
-                                                                                                           
                                                                                                            % Get default command line output from handles structure
                                                                                                            varargout{1} = handles.output;
                                                                                                            
@@ -97,10 +93,9 @@ gui_State = struct('gui_Name',       mfilename, ...
                                                                                                            % TODO Have this execute on slider scrubbing without releasing the mouse
                                                                                                            % button.
                                                                                                            function timeSlider_Callback(hObject, eventdata, handles)
-                                                                                                           % hObject    handle to timeSlider (see GCBO)
-                                                                                                           % eventdata  reserved - to be defined in a future version of MATLAB
-                                                                                                           % handles    structure with handles and user data (see GUIDATA)
+                                                                                                           global gyroXs gyroYs gyroZs
                                                                                                            delete(findall(0,'type', 'line', '-and', 'Color', 'r'));
+                                                                                                           
                                                                                                            lightY = get(handles.lightVsTime,'YLim');
                                                                                                            tempY  = get(handles.temperatureVsTime,'YLim');
                                                                                                            pressY = get(handles.pressureVsTime,'YLim');
@@ -110,22 +105,23 @@ gui_State = struct('gui_Name',       mfilename, ...
                                                                                                            line([time time],pressY,'Color','r', 'Parent', handles.pressureVsTime);
                                                                                                            line([time time],tempY,'Color','r', 'Parent', handles.temperatureVsTime);
                                                                                                            
-                                                                                                           % rotate(threeDeeRocket, [1, 0, 0], 10);
-                                                                                                           % rotate(h, [1 0 0], deg); % note: second input marks axis of rotation
-                                                                                                           % rotate(handles.rocketSim, [1 0 0], 10);
-                                                                                                           % get(handles.rocketSim, 'xdata')
-                                                                                                           % axes(handles.rocketSim);
-                                                                                                           % rocketCoords = cell2mat(varargin(5));
-                                                                                                           % X = rocketCoords(1:2, 1:21);
-                                                                                                           % Y = rocketCoords(1:2, 22:42);
-                                                                                                           % Z = rocketCoords(1:2, 43:63);
-                                                                                                           surf(X, Y, Z);
+                                                                                                           X = get(get(handles.rocketSim, 'Children'), 'Xdata');
+                                                                                                           Y = get(get(handles.rocketSim, 'Children'), 'Ydata');
+                                                                                                           Z = get(get(handles.rocketSim, 'Children'), 'Zdata');
+                                                                                                           rocket = surf(handles.rocketSim, X, Y, Z);
+                                                                                                           
+                                                                                                           % TODO Check for moving the slider in the negative direction.
+                                                                                                           theTime = cast(time, 'uint8');
+                                                                                                           rotate(rocket, [1 0 0], gyroXs(theTime + 1));
+                                                                                                           rotate(rocket, [0 1 0], gyroYs(theTime + 1));
+                                                                                                           rotate(rocket, [0 0 1], gyroZs(theTime + 1));
+                                                                                                           
+                                                                                                           % TODO Make the forward button the default animation button.
+                                                                                                           % Make sure axes are scaled properly after every rotation.
+                                                                                                           axis(handles.rocketSim, [-3 3 -3 3 -3 3 -1 3]);
                                                                                                            
                                                                                                            % --- Executes during object creation, after setting all properties.
                                                                                                            function timeSlider_CreateFcn(hObject, eventdata, handles)
-                                                                                                           % hObject    handle to timeSlider (see GCBO)
-                                                                                                           % eventdata  reserved - to be defined in a future version of MATLAB
-                                                                                                           % handles    empty - handles not created until after all CreateFcns called
                                                                                                            
                                                                                                            if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
                                                                                                                set(hObject,'BackgroundColor',[.9 .9 .9]);
@@ -139,37 +135,32 @@ gui_State = struct('gui_Name',       mfilename, ...
                                                                                                                numberOfReadings = get(handles.timeSlider, 'Max');
                                                                                                                
                                                                                                                if (get(handles.forwardAnimDirectionButton, 'Value') == 1)
-                                                                                                                   t = timer('TimerFcn', {@animateOneFrame, handles}, 'Period', (1 / get(handles.animSpeedSlider, 'Value')) + 0.001, 'ExecutionMode', 'fixedRate', 'TasksToExecute', numberOfReadings - get(handles.timeSlider, 'Value'));
-                                                                                                                   else
-                                                                                                                       t = timer('TimerFcn', {@animateOneFrame, handles}, 'Period', (1 / get(handles.animSpeedSlider, 'Value')) + 0.001, 'ExecutionMode', 'fixedRate', 'TasksToExecute', get(handles.timeSlider, 'Value'));
-                                                                                                                       end
+                                                                                                                   t = timer('TimerFcn', {@animateOneFrame, handles}, 'Period', (1 / get(handles.animSpeedSlider, 'Value')) + 0.001, 'ExecutionMode', 'fixedRate', 'TasksToExecute', numberOfReadings - get(handles.timeSlider, 'Value') - 1);
                                                                                                                        start(t)
-                                                                                                                       
-                                                                                                                       % --- Executes on slider movement.
-                                                                                                                       function animSpeedSlider_Callback(hObject, eventdata, handles)
-                                                                                                                       % hObject    handle to animSpeedSlider (see GCBO)
-                                                                                                                       % eventdata  reserved - to be defined in a future version of MATLAB
-                                                                                                                       % handles    structure with handles and user data (see GUIDATA)
-                                                                                                                       
-                                                                                                                       % --- Executes during object creation, after setting all properties.
-                                                                                                                       function animSpeedSlider_CreateFcn(hObject, eventdata, handles)
-                                                                                                                       % hObject    handle to animSpeedSlider (see GCBO)
-                                                                                                                       % eventdata  reserved - to be defined in a future version of MATLAB
-                                                                                                                       % handles    empty - handles not created until after all CreateFcns called
-                                                                                                                       
-                                                                                                                       if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-                                                                                                                           set(hObject,'BackgroundColor',[.9 .9 .9]);
-                                                                                                                           end
-                                                                                                                           
-                                                                                                                           function animateOneFrame(source, event, handles)
-                                                                                                                           % Animate a single frame of data.
-                                                                                                                           
-                                                                                                                           stepValues = get(handles.timeSlider, 'SliderStep');
-                                                                                                                           
-                                                                                                                           if (get(handles.forwardAnimDirectionButton, 'Value') == 1)
-                                                                                                                               set(handles.timeSlider, 'Value', get(handles.timeSlider, 'Value') + 1);
-                                                                                                                               else
-                                                                                                                                   set(handles.timeSlider, 'Value', get(handles.timeSlider, 'Value') - 1);
+                                                                                                                       end
+                                                                                                                       if (get(handles.timeSlider, 'Value') ~= 0 && get(handles.backAnimDirectionButton, 'Value') == 1)
+                                                                                                                           t = timer('TimerFcn', {@animateOneFrame, handles}, 'Period', (1 / get(handles.animSpeedSlider, 'Value')) + 0.001, 'ExecutionMode', 'fixedRate', 'TasksToExecute', get(handles.timeSlider, 'Value'));
+                                                                                                                               start(t)
+                                                                                                                               end
+                                                                                                                               
+                                                                                                                               % --- Executes during object creation, after setting all properties.
+                                                                                                                               function animSpeedSlider_CreateFcn(hObject, eventdata, handles)
+                                                                                                                               
+                                                                                                                               if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+                                                                                                                                   set(hObject,'BackgroundColor',[.9 .9 .9]);
                                                                                                                                    end
-                                                                                                                                   timeSlider_Callback(handles.timeSlider, event, handles);
+                                                                                                                                   set(hObject, 'Value', 1);
                                                                                                                                    
+                                                                                                                                   function animSpeedSlider_Callback(hObject, eventdata, handles, varargin)
+                                                                                                                                   
+                                                                                                                                   
+                                                                                                                                   function animateOneFrame(source, event, handles)
+                                                                                                                                   % Animate a single frame of data.
+                                                                                                                                   
+                                                                                                                                   if (get(handles.forwardAnimDirectionButton, 'Value') == 1)
+                                                                                                                                       set(handles.timeSlider, 'Value', get(handles.timeSlider, 'Value') + 1);
+                                                                                                                                       else
+                                                                                                                                           set(handles.timeSlider, 'Value', get(handles.timeSlider, 'Value') - 1);
+                                                                                                                                           end
+                                                                                                                                           timeSlider_Callback(handles.timeSlider, event, handles);
+                                                                                                                                           
